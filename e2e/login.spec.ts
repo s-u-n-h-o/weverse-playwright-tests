@@ -6,7 +6,10 @@ dotenv.config();
 const email = process.env.WEVERSE_EMAIL;
 const password = process.env.WEVERSE_PASSWORD;
 
-test.describe('로그인 플로우', () => {
+/***
+ * 로그인 관련
+ */
+test.describe('[LGN-001] 로그인 플로우', () => {
   test('이메일/비밀번호로 로그인 성공 후 홈페이지로 리다이렉트된다', async ({ page }) => {
     test.skip(!email || !password, 'WEVERSE_EMAIL / WEVERSE_PASSWORD 환경변수가 없습니다');
 
@@ -40,7 +43,7 @@ test.describe('로그인 플로우', () => {
     await expect(page.getByRole('button', { name: 'Login' })).not.toBeVisible();
   });
 
-  test('잘못된 비밀번호 입력 시 에러 메시지가 노출된다', async ({ page }) => {
+  test('[LGN-002] 잘못된 비밀번호 입력 시 에러 메시지가 노출된다', async ({ page }) => {
     await page.goto('https://weverse.io');
 
     await page.getByRole('button', { name: 'Login' }).click();
